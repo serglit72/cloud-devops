@@ -69,7 +69,7 @@ CloudFront distribution domain name:
 <br />
 ```sh
 dzz5chuashrb9.cloudfront.net
-```
+```sh
 <br />
 <p align="center">
   <a href="https://github.com/serglit72/devops/">
