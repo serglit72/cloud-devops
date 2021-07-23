@@ -64,11 +64,11 @@ There're topics covered in this project:
 <br />
 
 5. CloudFront distribution domain name:	
-<br />
-```python
 
-dzz5chuashrb9.cloudfront.net
-```
+
+<p align="center"> dzz5chuashrb9.cloudfront.net
+
+<br />
 <br />
 <p align="center">
   <a href="https://github.com/serglit72/devops/">
