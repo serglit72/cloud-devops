@@ -65,7 +65,8 @@ There're topics covered in this project:
 
 5. CloudFront distribution domain name:	
 <br />
-```sh
+```python
+
 dzz5chuashrb9.cloudfront.net
 ```
 <br />
