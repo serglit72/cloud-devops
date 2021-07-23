@@ -67,7 +67,7 @@ There're topics covered in this project:
 <br />
 CloudFront distribution domain name:	
 <br />
-```JS
+```sh
 dzz5chuashrb9.cloudfront.net
 ```
 <br />
