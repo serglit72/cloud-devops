@@ -63,11 +63,9 @@ There're topics covered in this project:
 <br />
 <br />
 
-5. CloudFront  domain is attached to the bucket
+5. CloudFront distribution domain name:	
 <br />
-CloudFront distribution domain name:	
-<br />
-```JS
+```sh
 dzz5chuashrb9.cloudfront.net
 ```
 <br />
