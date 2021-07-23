@@ -65,11 +65,10 @@ There're topics covered in this project:
 
 5. CloudFront  domain is attached to the bucket
 <br />
-CloudFront distribution domain name:	
-<br />
+CloudFront distribution domain name:
 ```sh
 dzz5chuashrb9.cloudfront.net
-  ```
+```
 <br />
 <p align="center">
   <a href="https://github.com/serglit72/devops/">
