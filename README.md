@@ -1,5 +1,6 @@
 
 
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project 1
 
@@ -96,4 +97,5 @@ Try it. You have to see that static website via browser.
 ```sh
 https://my-048086412071-next-bucket.s3.amazonaws.com/index.html
 ```
+
 
