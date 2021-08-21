@@ -9,7 +9,7 @@ jobs:
   
   print_hello:
     environment:
-      WORD: "hello"
+      WORD1: "hello"
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -17,12 +17,12 @@ jobs:
       - run:
           name: Print word "hello"
           command: |
-            echo $WORD
+            echo $WORD1
 
 
   print_world:
     environment:
-      WORD: "world"
+      WORD2: "world"
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Print word "world"
           command: |
-            echo $WORD
+            echo $WORD2
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -38,7 +38,7 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
+      # - welcome/run
       - print_hello 
       - print_world:
           requires: [print_hello]
