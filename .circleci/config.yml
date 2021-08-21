@@ -31,9 +31,21 @@ jobs:
           name: Print word "world"
           command: |
             echo $WORD2
-
+ 
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR
 # Orchestrate or schedule a set of jobs
 workflows:
+  test-env-vars:
+    jobs:
+      - build
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
@@ -42,3 +54,4 @@ workflows:
       - print_hello 
       - print_world:
           requires: [print_hello]
+      
