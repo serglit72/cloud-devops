@@ -41,11 +41,14 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - run: return 1
+          # name: Print word "world"
+          # command: |
+          #   echo $WORD2
       - run:
-          name: Print word "world"
-          command: |
-            echo $WORD2
- 
+          name: Upload Failed Tests
+          command: echo "Hello Error!"
+          when: on_fail
   build:
     docker:
       - image: cimg/base:2020.01
@@ -90,14 +93,14 @@ workflows:
 
   test-env-vars:
     jobs:
-      - print_workflow_id
+      # - print_workflow_id
   # Name the workflow "welcome"
   # welcome:
     # Run the welcome/run job in its own container
     # jobs:
       # - welcome/run
-      # - print_hello 
-      # - print_world:
+      - print_hello 
+      - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
     # - print_output_file:
