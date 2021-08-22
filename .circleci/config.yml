@@ -41,7 +41,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: return 1
+      - run:  echo 2/0
           # name: Print word "world"
           # command: |
           #   echo $WORD2
