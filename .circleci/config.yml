@@ -22,10 +22,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: Print workflow ID
-          command: print_pipeline_id
-  
+      - run: print_pipeline_id
+          
   print_hello:
     environment:
       WORD1: "hello"
