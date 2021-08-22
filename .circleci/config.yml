@@ -1,11 +1,30 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+
+commands:
+  print_pipeline_id:
+    description: "Print a CircleCI workflowID"
+    parameters:
+      to:
+        type: string
+        default: $CIRCLE_WORKFLOW_ID
+    steps:
+      - run: echo "This is a workflow ID:<< parameters.to >>"
+
 # Use a package of configuration called an orb.
-orbs:
+# orbs:
   # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
+  # welcome: circleci/welcome-orb@0.4.1
 jobs:
- 
+  
+  print_workflow_id:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Print workflow ID
+          command: print_pipeline_id
   
   print_hello:
     environment:
@@ -20,27 +39,27 @@ jobs:
             echo $WORD1
 
 
-  # print_world:
-  #   environment:
-  #     WORD2: "world"
-  #   docker:
-  #     - image: circleci/node:13.8.0
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Print word "world"
-  #         command: |
-  #           echo $WORD2
+  print_world:
+    environment:
+      WORD2: "world"
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Print word "world"
+          command: |
+            echo $WORD2
  
-  # build:
-  #   docker:
-  #     - image: cimg/base:2020.01
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: "echo an env var that is part of our project"
-  #         command: |
-  #           echo $MY_ENV_VAR
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR
 
   save_hello_world_output:
     environment:
@@ -76,7 +95,7 @@ workflows:
 
   test-env-vars:
     jobs:
-      # - build
+      - print_workflow_id
   # Name the workflow "welcome"
   # welcome:
     # Run the welcome/run job in its own container
@@ -85,6 +104,6 @@ workflows:
       # - print_hello 
       # - print_world:
       #     requires: [print_hello]
-    - save_hello_world_output
-    - print_output_file:
-        requires: [save_hello_world_output]
+    # - save_hello_world_output
+    # - print_output_file:
+    #     requires: [save_hello_world_output]
