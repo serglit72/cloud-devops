@@ -5,7 +5,7 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 jobs:
-  
+ 
   
   print_hello:
     environment:
@@ -20,38 +20,70 @@ jobs:
             echo $WORD1
 
 
-  print_world:
+  # print_world:
+  #   environment:
+  #     WORD2: "world"
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Print word "world"
+  #         command: |
+  #           echo $WORD2
+ 
+  # build:
+  #   docker:
+  #     - image: cimg/base:2020.01
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "echo an env var that is part of our project"
+  #         command: |
+  #           echo $MY_ENV_VAR
+
+  save_hello_world_output:
     environment:
-      WORD2: "world"
+      WORD1: "Hello World"
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
-          name: Print word "world"
+          name: Save word "Hello World"
           command: |
-            echo $WORD2
- 
-  build:
+            echo "text $WORD to output here" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+          - ./output.txt
+  
+  print_output_file:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
-          name: "echo an env var that is part of our project"
+          name: Print the "Hello World" from workspace file
           command: |
-            echo $MY_ENV_VAR
+            cat output.txt
+
+
 # Orchestrate or schedule a set of jobs
 workflows:
+
   test-env-vars:
     jobs:
-      - build
+      # - build
   # Name the workflow "welcome"
-  welcome:
+  # welcome:
     # Run the welcome/run job in its own container
-    jobs:
+    # jobs:
       # - welcome/run
-      - print_hello 
-      - print_world:
-          requires: [print_hello]
-      
+      # - print_hello 
+      # - print_world:
+      #     requires: [print_hello]
+    - save_hello_world_output
+    - print_output_file
