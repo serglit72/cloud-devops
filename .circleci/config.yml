@@ -41,10 +41,11 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:  echo 2/0
-          # name: Print word "world"
-          # command: |
-          #   echo $WORD2
+      - run:  
+          name: Print word "world"
+          command: |
+            echo $WORD2
+            return 1
       - run:
           name: Upload Failed Tests
           command: echo "Hello Error!"
