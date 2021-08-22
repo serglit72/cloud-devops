@@ -51,10 +51,10 @@ jobs:
       - checkout
       - run:
           name: Save word "Hello World"
-          command: |
-            echo "text $WORD to output here" > output.txt
+          command: echo "text $WORD to output here" > output.txt
+            
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ˜/
           paths:
           - ./output.txt
   
@@ -64,11 +64,11 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: ˜/
       - run:
           name: Print the "Hello World" from workspace file
-          command: |
-            cat output.txt
+          command: cat output.txt
+            
 
 
 # Orchestrate or schedule a set of jobs
