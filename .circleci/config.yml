@@ -4,12 +4,8 @@ version: 2.1
 commands:
   print_pipeline_id:
     description: "Print a CircleCI workflowID"
-    parameters:
-      to:
-        type: string
-        default: "Hello World"
     steps:
-      - run: echo "This is a workflow ID:<< parameters.to >>"
+      - run: echo ${CIRCLE_WORKFLOW_ID}
 
 # Use a package of configuration called an orb.
 # orbs:
@@ -22,8 +18,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - print_pipeline_id: 
-          to: $CIRCLE_WORKFLOW_ID
+      - print_pipeline_id
+          
           
   print_hello:
     environment:
