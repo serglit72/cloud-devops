@@ -75,7 +75,24 @@ jobs:
           root: ~/
           paths:
           - output.txt
-  
+
+  save_inventory_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Save inventory
+          command: |
+            aws ec2 describe-instances --region=us-east-1
+            --query 'Reservations[*].Instances[*].PublicIpAddress' 
+            --output text >> inventory
+            
+      - persist_to_workspace:
+          root: ~/
+          paths:
+          - inventory
+
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
@@ -87,7 +104,16 @@ jobs:
           name: Print the "Hello World" from workspace file
           command: cat ~/output.txt
             
-
+  print_output_inventory_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Print inventory file from workspace 
+          command: cat ~/inventory
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -104,5 +130,7 @@ workflows:
       - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-    # - print_output_file:
-    #     requires: [save_hello_world_output]
+      - save_inventory_file
+      - print_output_inventory_file:
+          requires: [save_inventory_file]
+        # requires: [save_hello_world_output]
