@@ -60,15 +60,31 @@ jobs:
           name: Upload Failed Tests
           command: echo "Hello Error!"
           when: on_fail
-  build:
-    docker:
-      - image: cimg/base:2020.01
-    steps:
-      - checkout
+  # build_1:
+  #   docker:
+  #     - image: cimg/base:2020.01
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "echo an env var that is part of our project"
+  #         command: |
+  #           echo $MY_ENV_VAR
+
+build:
+  working_directory: /tmp
+  steps:
       - run:
-          name: "echo an env var that is part of our project"
+          name: Creating Dummy inventory
           command: |
-            echo $MY_ENV_VAR
+            echo "my artifact file" > /tmp/art-inventory;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/art-invent2;
+      - store_artifacts:
+          path: /tmp/art-inventory
+          destination: artifact-file
+      - store_artifacts:
+          path: /tmp/artifacts
+
 
   save_hello_world_output:
     environment:
@@ -92,14 +108,17 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: avtor
-          # aws-region: us-east-1
+      - command: |
+            mkdir /ansible/;
+            echo "my inventory file" > /ansible/inventory;   
 
-      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > inventory
-            
+      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > /ansible/inventory
+       
+
       - persist_to_workspace:
           root: ~/
           paths:
-          - inventory
+          - /ansible/inventory
 
   print_output_file:
     docker:
@@ -134,7 +153,8 @@ workflows:
       jobs:
         - aws-cli-save-inventory-file:
             context: aws
-             
+        - print_output_inventory_file:
+            requires: [aws-cli-save-inventory-file]     
 
     # jobs:
   #     # - print_workflow_id
