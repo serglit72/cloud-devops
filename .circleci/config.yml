@@ -14,13 +14,13 @@ commands:
   # Declare a dependency on the welcome-orb
   # welcome: circleci/welcome-orb@0.4.1
 jobs:
-  aws-cli-example:
-    executor: aws-cli/default
-    steps:
-      - checkout
-      - aws-cli/setup:
-          profile-name: example
-      - run: echo aws-cli --version
+  # aws-cli-example:
+  #   executor: aws-cli/default
+  #   steps:
+  #     - checkout
+  #     - aws-cli/setup:
+  #         profile-name: example
+  #     - run: echo aws-cli --version
   
   
   print_workflow_id:
@@ -126,11 +126,11 @@ jobs:
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  # aws-cli:
+  aws-cli:
   #   jobs:
   #     - aws-cli-example:
   #         context: aws ec2 describe-instances --region=us-east-1
-  test-env-vars:
+  # test-env-vars:
     jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
