@@ -143,7 +143,7 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-        - aws-cli/save_inventory_file:
+        - aws-cli:
             context: 
               - save_inventory_file/command
         - print_output_inventory_file:
