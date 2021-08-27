@@ -93,7 +93,7 @@ jobs:
       - aws-cli/setup:
           profile-name: avtor
           run: | 
-            aws ec2 describe-instances --region=us-east-1\
+            ec2 describe-instances --region=us-east-1\
             --query 'Reservations[*].Instances[*].PublicIpAddress'\ 
             --output text >> inventory
             
@@ -130,8 +130,8 @@ workflows:
   #   jobs:
   #     - aws-cli-example:
   #         context: aws ec2 describe-instances --region=us-east-1
-  # test-env-vars:
-  aws-cli:
+  test-env-vars:
+  # aws-cli:
       jobs:
         - aws-cli-save-inventory-file:
             context: aws 
