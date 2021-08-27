@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: example
+          profile-name: avtor
       - run: echo aws-cli --version
   
   
@@ -60,15 +60,15 @@ jobs:
           name: Upload Failed Tests
           command: echo "Hello Error!"
           when: on_fail
-  # build_1:
-  #   docker:
-  #     - image: cimg/base:2020.01
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: "echo an env var that is part of our project"
-  #         command: |
-  #           echo $MY_ENV_VAR
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR
 
 
 
@@ -100,7 +100,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-          - ~/ansible/inventory
+          - inventory
 
   print_output_file:
     docker:
@@ -126,17 +126,14 @@ jobs:
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  # aws-cli:
-  #   jobs:
-  #     - aws-cli-example:
-  #         context: aws ec2 describe-instances --region=us-east-1
   test-env-vars:
-  # aws-cli:
-      jobs:
-        - aws-cli-save-inventory-file:
-            context: aws
-        - print_output_inventory_file:
-            requires: [aws-cli-save-inventory-file]     
+    jobs:
+      - aws-cli-save-inventory-file:
+          context: aws
+      - print_output_inventory_file:
+          requires: [aws-cli-save-inventory-file]     
+
+
 
     # jobs:
   #     # - print_workflow_id
@@ -149,7 +146,4 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-        # - aws-cli-save-inventory-file
-        # - print_output_inventory_file:
-        #     requires: [aws-cli/save_inventory_file]
         # requires: [save_hello_world_output]
