@@ -130,7 +130,7 @@ workflows:
   aws-cli:
     jobs:
       - aws-cli-example:
-          context: aws
+          context: aws ec2 describe-instances --region=us-east-1
   # test-env-vars:
   #   jobs:
   #     # - print_workflow_id
