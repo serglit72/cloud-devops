@@ -100,7 +100,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-          - /ansible/inventory
+          - ~/ansible/inventory
 
   print_output_file:
     docker:
