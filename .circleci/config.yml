@@ -97,10 +97,6 @@ jobs:
           profile-name: avtor
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > /ansible/inventory
       
-      - command: |
-            mkdir /ansible/;
-            echo "my inventory file" > /ansible/inventory;
-
       - persist_to_workspace:
           root: ~/
           paths:
