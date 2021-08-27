@@ -70,20 +70,7 @@ jobs:
   #         command: |
   #           echo $MY_ENV_VAR
 
-build:
-  working_directory: /tmp
-  steps:
-      - run:
-          name: Creating Dummy inventory
-          command: |
-            echo "my artifact file" > /tmp/art-inventory;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/art-invent2;
-      - store_artifacts:
-          path: /tmp/art-inventory
-          destination: artifact-file
-      - store_artifacts:
-          path: /tmp/artifacts
+
 
 
   save_hello_world_output:
@@ -108,12 +95,11 @@ build:
       - checkout
       - aws-cli/setup:
           profile-name: avtor
+      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > /ansible/inventory
+      
       - command: |
             mkdir /ansible/;
-            echo "my inventory file" > /ansible/inventory;   
-
-      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > /ansible/inventory
-       
+            echo "my inventory file" > /ansible/inventory;
 
       - persist_to_workspace:
           root: ~/
