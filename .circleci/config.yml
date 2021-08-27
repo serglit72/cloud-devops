@@ -93,6 +93,7 @@ jobs:
     executor: aws-cli/default
     steps:
       - checkout
+      - run: echo "[all]" > inventory
       - aws-cli/setup:
           profile-name: avtor
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > inventory
