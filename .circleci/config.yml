@@ -93,15 +93,19 @@ jobs:
     executor: aws-cli/default
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run: echo "[all]" > inventory-1
       - aws-cli/setup:
           profile-name: avtor
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > inventory-1
       
+      
+      
       - persist_to_workspace:
           root: ~/
           paths:
-          - ./inventory-1
+          - inventory-1
 
   print_output_file:
     docker:
