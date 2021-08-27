@@ -86,14 +86,13 @@ jobs:
           paths:
           - output.txt
 
-  save_inventory_file:
-    docker:
-      - image: circleci/node:13.8.0
+  aws-cli/save_inventory_file:
+    executor: aws-cli/default
     steps:
       - checkout
-      - run:
-          name: Save inventory
-          command: |
+      - aws-cli/setup:
+          profile-name: avtor
+          run: | 
             aws ec2 describe-instances --region=us-east-1\
             --query 'Reservations[*].Instances[*].PublicIpAddress'\ 
             --output text >> inventory
@@ -143,9 +142,7 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-        - aws-cli:
-            context: 
-              - save_inventory_file/command
+        - aws-cli/save_inventory_file
         - print_output_inventory_file:
-            requires: [save_inventory_file]
+            requires: [aws-cli/save_inventory_file]
         # requires: [save_hello_world_output]
