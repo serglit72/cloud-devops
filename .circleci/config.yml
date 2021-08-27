@@ -86,7 +86,7 @@ jobs:
           paths:
           - output.txt
 
-  aws-cli/save_inventory_file:
+  aws-cli:
     executor: aws-cli/default
     steps:
       - checkout
@@ -142,7 +142,7 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-        - aws-cli/save_inventory_file
+        - aws-cli
         - print_output_inventory_file:
-            requires: [aws-cli/save_inventory_file]
+            requires: [aws-cli]
         # requires: [save_hello_world_output]
