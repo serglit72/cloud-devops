@@ -94,8 +94,8 @@ jobs:
       - run:
           name: Save inventory
           command: |
-            aws ec2 describe-instances --region=us-east-1
-            --query 'Reservations[*].Instances[*].PublicIpAddress' 
+            aws ec2 describe-instances --region=us-east-1\
+            --query 'Reservations[*].Instances[*].PublicIpAddress'\ 
             --output text >> inventory
             
       - persist_to_workspace:
@@ -127,12 +127,12 @@ jobs:
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  aws-cli:
-    jobs:
-      - aws-cli-example:
-          context: aws ec2 describe-instances --region=us-east-1
-  # test-env-vars:
+  # aws-cli:
   #   jobs:
+  #     - aws-cli-example:
+  #         context: aws ec2 describe-instances --region=us-east-1
+  test-env-vars:
+    jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
   # welcome:
@@ -143,7 +143,7 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-      # - save_inventory_file
-      # - print_output_inventory_file:
-      #     requires: [save_inventory_file]
+      - save_inventory_file
+      - print_output_inventory_file:
+          requires: [save_inventory_file]
         # requires: [save_hello_world_output]
