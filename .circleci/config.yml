@@ -92,7 +92,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: avtor
-          aws-region: us-east-1
+          # aws-region: us-east-1
 
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
             
