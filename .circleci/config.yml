@@ -86,7 +86,7 @@ jobs:
           paths:
           - output.txt
 
-  aws-cli/save_inventory_file:
+  aws-cli-save-inventory-file:
     executor: aws-cli/default
     steps:
       - checkout
@@ -130,8 +130,13 @@ workflows:
   #   jobs:
   #     - aws-cli-example:
   #         context: aws ec2 describe-instances --region=us-east-1
-  test-env-vars:
-    jobs:
+  # test-env-vars:
+  aws-cli:
+      jobs:
+        - aws-cli-save-inventory-file:
+            context: aws 
+
+    # jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
   # welcome:
@@ -142,7 +147,7 @@ workflows:
       # - print_world
       #     requires: [print_hello]
     # - save_hello_world_output
-        - aws-cli/save_inventory_file
-        - print_output_inventory_file:
-            requires: [aws-cli/save_inventory_file]
+        # - aws-cli-save-inventory-file
+        # - print_output_inventory_file:
+        #     requires: [aws-cli/save_inventory_file]
         # requires: [save_hello_world_output]
