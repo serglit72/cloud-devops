@@ -96,6 +96,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: echo "[all]" > inventory-1
+      - run: cat inventory-1
       - run: ls
       - run: pwd
       - aws-cli/setup:
