@@ -94,7 +94,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/project/
       - run: echo "[all]" > inventory-1
       - run: cat inventory-1
       - run: ls
@@ -104,7 +104,7 @@ jobs:
       - run: pwd
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory-1
       - persist_to_workspace:
-          root: ~/
+          root: ~/project/
           paths:
           - inventory-1
 
