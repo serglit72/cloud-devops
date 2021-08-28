@@ -96,9 +96,6 @@ jobs:
       - attach_workspace:
           at: ~/project/
       - run: echo "[all]" > inventory-1
-      - run: cat inventory-1
-      - run: ls
-      - run: pwd
       - aws-cli/setup:
           profile-name: avtor
       - run: pwd
@@ -107,6 +104,7 @@ jobs:
           root: ~/project/
           paths:
           - inventory-1
+      - run: cat inventory-1
 
   print_output_file:
     docker:
@@ -125,10 +123,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/project/
       - run:
           name: Print inventory file from workspace 
-          command: cat ~/inventory
+          command: cat inventory-1
 
 # Orchestrate or schedule a set of jobs
 workflows:
