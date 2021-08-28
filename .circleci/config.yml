@@ -96,6 +96,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: echo "[all]" > inventory-1
+      - run: ls
+      - run: pwd
       - aws-cli/setup:
           profile-name: avtor
       - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text > inventory-1
