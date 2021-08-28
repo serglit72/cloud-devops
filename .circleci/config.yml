@@ -99,7 +99,7 @@ jobs:
       - aws-cli/setup:
           profile-name: avtor
       - run: pwd
-      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory-1
+      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> ~/project/inventory-1
       - persist_to_workspace:
           root: ~/project/
           paths:
