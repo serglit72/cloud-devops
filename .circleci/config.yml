@@ -100,15 +100,15 @@ jobs:
           profile-name: avtor
       - run: 
           command: | 
-            echo "[all]" > /home/circleci/inventory-3
-            aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> /home/circleci/inventory-3
-            cat /home/circleci/inventory-3
+            echo "[all]" > inventory-4
+            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> /home/circleci/inventory-3
+            cat inventory-4
 
               
       - persist_to_workspace:
           root: ~/
           paths:
-            - inventory-3
+            - inventory-4
 
   print_output_file:
     docker:
