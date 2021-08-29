@@ -131,7 +131,7 @@ jobs:
       - run:
           name: Print inventory file from workspace 
           command: | 
-            cat inventory-5
+            cat ~/inventory-5
             pwd
 
 # Orchestrate or schedule a set of jobs
