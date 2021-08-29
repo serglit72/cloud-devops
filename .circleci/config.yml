@@ -125,6 +125,23 @@ jobs:
             pwd
             ansible-playbook -i inventory main-remote.yml
 
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run: apk add --update curl
+      - run:
+          name: Smoke test for accessability google.com
+          command: |
+            URL="https://google.com" 
+            if curl -s --head ${URL} 
+            then
+              return 0
+            else
+              return 1
+            fi
+
   aws-cli-save-inventory-file:
     executor: aws-cli/default
     steps:
@@ -180,6 +197,8 @@ workflows:
       #     context: aws
       # - create_infrastructure_2
       - configure_infrastructure
+      - smoke_test:
+          requires: [configure_infrastructure]
     # jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
