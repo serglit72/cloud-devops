@@ -95,7 +95,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      - run: echo "[all]" > inventory-2
       - aws-cli/setup:
           profile-name: avtor
       - run: 
@@ -108,7 +107,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - inventory-5
+          - inventory-5
 
   print_output_file:
     docker:
