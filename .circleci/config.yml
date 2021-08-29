@@ -101,7 +101,7 @@ jobs:
       - run: 
           command: | 
             echo "[all]" > inventory-4
-            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> /home/circleci/inventory-3
+            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> /home/circleci/inventory-4
             cat inventory-4
 
               
