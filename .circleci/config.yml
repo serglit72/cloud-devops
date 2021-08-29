@@ -94,7 +94,7 @@ jobs:
           profile-name: avtor
       - run: 
           command: |
-            aws cloudformation create-stack --stack-name ansible-circleci --template-body file://Ansible/template.yml  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region $AWS_DEFAULT_REGION
+            aws cloudformation create-stack --stack-name ansible-circleci2 --template-body file://Ansible/template.yml  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region $AWS_DEFAULT_REGION
 
   aws-cli-save-inventory-file:
     executor: aws-cli/default
