@@ -122,6 +122,7 @@ jobs:
       - run:
           name: Configure server
           command: |
+            pwd
             ansible-playbook -i inventory.txt main-remote.yml
 
   aws-cli-save-inventory-file:
