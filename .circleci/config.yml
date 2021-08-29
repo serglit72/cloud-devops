@@ -94,16 +94,23 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project/
-      - run: echo "[all]" > inventory-1
+          at: ~/
+      - run: echo "[all]" > inventory-2
       - aws-cli/setup:
           profile-name: avtor
-      - run: aws ec2 describe-instances --region=us-east-1 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> ~/project/inventory-1
+      - run: 
+          command: | 
+              echo "[all]" > inventory-3
+              aws ec2 describe-instances --region=us-east-1 \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text >> inventory-3
+              cat inventory-3
+              cat ~/inventory-3
+              
       - persist_to_workspace:
-          root: ~/project/
+          root: ~/
           paths:
-          - inventory-1
-      - run: cat ~/project/inventory-1
+            - inventory-3
 
   print_output_file:
     docker:
