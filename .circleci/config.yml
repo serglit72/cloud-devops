@@ -99,15 +99,15 @@ jobs:
           profile-name: avtor
       - run: 
           command: | 
-            echo "[all]" > inventory-5
-            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory-5
-            cat inventory-5
-            pwd
+            echo "[all]" > ~/inventory-6
+            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> ~/inventory-6
+            cat ~/inventory-6
+            ls ~/
               
       - persist_to_workspace:
           root: ~/
           paths:
-          - ~/inventory-5
+          - inventory-5
 
   print_output_file:
     docker:
