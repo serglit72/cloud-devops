@@ -96,6 +96,18 @@ jobs:
           command: |
             aws cloudformation create-stack --stack-name ansible-circleci2 --template-body file://Ansible/template.yml  --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region $AWS_DEFAULT_REGION
 
+  create_infrastructure_2:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Ensure backend infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file template.yml \
+              --stack-name my-stack
+
   aws-cli-save-inventory-file:
     executor: aws-cli/default
     steps:
@@ -142,14 +154,14 @@ jobs:
 workflows:
   test-env-vars:
     jobs:
-      - aws-cli-save-inventory-file:
-          context: aws
-          requires: [create_infrastructure]
-      - print_output_inventory_file:
-          requires: [aws-cli-save-inventory-file]     
-      - create_infrastructure:
-          context: aws
-
+      # - aws-cli-save-inventory-file:
+      #     context: aws
+      #     requires: [create_infrastructure]
+      # - print_output_inventory_file:
+      #     requires: [aws-cli-save-inventory-file]     
+      # - create_infrastructure:
+      #     context: aws
+      - create_infrastructure_2
     # jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
