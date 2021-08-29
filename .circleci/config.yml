@@ -100,9 +100,9 @@ jobs:
           profile-name: avtor
       - run: 
           command: | 
-            echo "[all]" > ~/inventory-4
-            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> ~/inventory-4
-            cat ~/inventory-4
+            echo "[all]" > inventory-5
+            aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory-5
+            cat inventory-5
 
               
       - persist_to_workspace:
