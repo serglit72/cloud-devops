@@ -103,12 +103,12 @@ jobs:
             echo "[all]" > inventory-5
             aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory-5
             cat inventory-5
-
+            pwd
               
       - persist_to_workspace:
           root: ~/
           paths:
-            - inventory-4
+            - inventory-5
 
   print_output_file:
     docker:
@@ -130,7 +130,9 @@ jobs:
           at: ~/
       - run:
           name: Print inventory file from workspace 
-          command: cat inventory-3
+          command: | 
+            cat inventory-5
+            pwd
 
 # Orchestrate or schedule a set of jobs
 workflows:
