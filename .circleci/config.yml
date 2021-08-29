@@ -142,10 +142,11 @@ jobs:
 workflows:
   test-env-vars:
     jobs:
-      # - aws-cli-save-inventory-file:
-      #     context: aws
-      # - print_output_inventory_file:
-      #     requires: [aws-cli-save-inventory-file]     
+      - aws-cli-save-inventory-file:
+          context: aws
+          requires: [create_infrastructure]
+      - print_output_inventory_file:
+          requires: [aws-cli-save-inventory-file]     
       - create_infrastructure:
           context: aws
 
