@@ -102,7 +102,7 @@ jobs:
             echo "[all]" > ~/inventory-6
             aws ec2 describe-instances --region=us-west-2 --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> ~/inventory-6
             cat ~/inventory-6
-            ls ~/project/
+            pwd
               
       - persist_to_workspace:
           root: ~/
