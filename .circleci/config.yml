@@ -87,7 +87,7 @@ jobs:
           - output.txt
   create_infrastructure:
     working_directory: ~/Ansible/
-    executor: amazon/aws-cli
+    executor: aws-cli/default
     steps:
       - checkout
       - aws-cli/setup:
