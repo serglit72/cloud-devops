@@ -107,6 +107,22 @@ jobs:
             aws cloudformation deploy \
               --template-file template.yml \
               --stack-name my-stack
+  configure_infrastructure:
+    docker: 
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["b3:af:53:87:9b:da:ca:e9:20:d8:0f:91:1f:b1:86:51"]
+        
+      - run:
+          name: install dependencies
+          command: |
+            apk add --update ansible 
+      - run:
+          name: Configure server
+          command: |
+            ansible-palybook -i inventory.txt playbook.yml
 
   aws-cli-save-inventory-file:
     executor: aws-cli/default
@@ -161,7 +177,8 @@ workflows:
       #     requires: [aws-cli-save-inventory-file]     
       # - create_infrastructure:
       #     context: aws
-      - create_infrastructure_2
+      # - create_infrastructure_2
+      - configure_infrastructure
     # jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
