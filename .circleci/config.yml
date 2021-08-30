@@ -134,7 +134,7 @@ jobs:
           fingerprints: ["b3:af:53:87:9b:da:ca:e9:20:d8:0f:91:1f:b1:86:51"]
       - run: apk add --update curl
       - run:
-          name: Smoke test for accessability google.com
+          name: Smoke test for accessability google.com/
           command: |
             URL="https://google.com" 
             if curl -s --head ${URL} 
