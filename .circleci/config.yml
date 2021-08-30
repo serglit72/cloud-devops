@@ -130,6 +130,8 @@ jobs:
       - image: alpine:latest
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints: ["b3:af:53:87:9b:da:ca:e9:20:d8:0f:91:1f:b1:86:51"]
       - run: apk add --update curl
       - run:
           name: Smoke test for accessability google.com
