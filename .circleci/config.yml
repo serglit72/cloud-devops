@@ -222,8 +222,8 @@ workflows:
       #     context: aws
       # - create_infrastructure_2
       - configure_infrastructure
-      # - smoke_test2:
-      #     requires: [configure_infrastructure]
+      - smoke_test2:
+          requires: [configure_infrastructure]
     # jobs:
   #     # - print_workflow_id
   # Name the workflow "welcome"
