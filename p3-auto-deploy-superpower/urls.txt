@@ -1,0 +1,6 @@
+[URL01]
+https://github.com/serglit72/Devops-p3-starter
+[URL02]
+http://udapeople-s3-7e3218c.s3-website-us-west-1.amazonaws.com/index.html
+[URL03]
+https://d2aeduvay4od8r.cloudfront.net
