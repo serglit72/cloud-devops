@@ -27,71 +27,21 @@ There're topics covered in this project:
 <h3><b>STEPS are DONE (with screenshots):</b></h3>
 
 1. A public S3 bucket created 
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/s3-is-ready-screenshot.png" alt="S3 is Ready to go">
-  </a>
-<br />
-<br />
-
 
 2. Static Website files downloaded.
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/files-downloaded-screenshot.png" >
-  </a>
-<br />
-<br />
 
 3. In the bucket settings just enabled "website hosting" feature
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/website-hosting-enabled-screenshot.png" >
-  </a>
-<br />
-<br />
 
 4. Secured the public access using IAM policies settings
 
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/public-access-secured-screenshot.png" >
-  </a>
-<br />
-<br />
-
 5. CloudFront distribution domain name:	
 
-
-<p align="center"> dzz5chuashrb9.cloudfront.net
-
-<br />
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/cloudfront-distribution-screenshot.png" >
-  </a>
-<br />
-<br />
+[ dzz5chuashrb9.cloudfront.net ]
 
 6. Now the static website is available from web browser via website-endpoint : 
 ```sh
 http://my-048086412071-next-bucket.s3-website-us-east-1.amazonaws.com
 ```
-
-Try it. You have to see that static website via browser.
-<br />
-<br />
-<p align="center">
-  <a href="https://github.com/serglit72/devops/">
-    <img src="images/website-lives-screenshot.png" >
-  </a>
-<br />
-<br />
 
 7. Access the bucket object via its S3 object URL:
 ```sh
